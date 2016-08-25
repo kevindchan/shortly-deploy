@@ -3,6 +3,13 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
+      options: {
+        separator: ';'
+      },
+      dist: {
+        src: ['./*.js', 'app/collections/*.js', 'app/models/*.js', 'lib/*.js', 'public/client/*.js'],
+        dest: 'concatMain.js'
+      }
     },
 
     mochaTest: {
@@ -21,11 +28,16 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      dist: {
+        src: 'concatMain.js',
+        dest: 'uglyCattedMain.min.js'
+      }
     },
 
     eslint: {
       target: [
         // Add list of files to lint here
+        './*.js', 'app/collections/*.js', 'app/models/*.js', 'lib/*.js', 'public/client/*.js'
       ]
     },
 
